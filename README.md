@@ -28,6 +28,13 @@ welp the project is more of a learning project and is not made by any means to u
 
 you should be able to get in http://localhost:project_port/
 
+## routes
+- /API/test //db status
+- /API/play?path=pathtofile
+- /API/files
+- /watch?path=pathtofile
+- /
+
 # Main goals or prupose of this project
 
 learn the basics of express and mysql and have fun :D
