@@ -1,0 +1,6 @@
+# ignore .env
+.env
+# packages
+/node_modules/
+#compiled
+/dist/
