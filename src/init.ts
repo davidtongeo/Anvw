@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import mysql from "mysql2";
 import { existsSync, createWriteStream } from "fs";
 import { resolve, join } from "path";
 function GetRealPath(filepath: string) {
@@ -53,5 +54,13 @@ function GetRealPath(filepath: string) {
                 .replace("\t", "")
         );
         wstream.end();
+        const connection = mysql.createConnection({
+            host: db_host,
+            password: db_pass,
+            user: db_user,
+        });
+        //create the database
+        connection.query("CREATE DATABASE IF NOT EXISTS Anvw", (err, result) => { });
+        connection.destroy();
     }
 })();

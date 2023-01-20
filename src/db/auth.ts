@@ -9,6 +9,7 @@ config();
 const { db_path } = process.env;
 export async function Auth() {
     try {
+        console.log("initialized database");
         await db.authenticate({ logging: false });
         console.log("db authenticated");
         await FilesModel.sync({ logging: false });
