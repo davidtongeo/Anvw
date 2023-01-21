@@ -2,6 +2,5 @@
 /.env
 # packages
 /node_modules/
-/node_modules
 #compiled
-/dist
+/dist/
