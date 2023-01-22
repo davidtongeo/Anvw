@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "tsc; node ./dist/init.js; node ./dist/index.js"
+    "compile": "tsc",
+    "run": "node ./dist/init.js && node ./dist/index.js"
   },
   "keywords": [],
   "author": "DAVID",

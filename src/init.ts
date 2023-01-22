@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 import mysql from "mysql2";
 import { existsSync, createWriteStream } from "fs";
-import { resolve, join } from "path";
+import { resolve } from "path";
 function GetRealPath(filepath: string) {
     const OsHOME = require("os").homedir();
     //this function will return the real extended path
@@ -61,7 +61,9 @@ function GetRealPath(filepath: string) {
             user: db_user,
         });
         //create the database
-        connection.query("CREATE DATABASE IF NOT EXISTS Anvw", (err, result) => { });
+        connection.query("CREATE DATABASE IF NOT EXISTS Anvw", (err, result) => {
+            console.log(err);
+        });
         connection.destroy();
     }
 })();
