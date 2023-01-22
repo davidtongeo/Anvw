@@ -3,9 +3,7 @@ import mysql from "mysql2";
 import { existsSync, createWriteStream } from "fs";
 import { resolve, join } from "path";
 function GetRealPath(filepath: string) {
-    const OsHOME = process.env.plataform?.startsWith("win32")
-        ? process.env.userProfile
-        : process.env.HOME;
+    const OsHOME = require("os").homedir();
     //this function will return the real extended path
     if (filepath[0] === "~") {
         return OsHOME + filepath.slice(1);
