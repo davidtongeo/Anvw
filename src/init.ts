@@ -1,14 +1,18 @@
-import inquirer from "inquirer";
 import mysql from "mysql2";
+import inquirer from "inquirer";
+
 import { existsSync, createWriteStream } from "fs";
-import { resolve, join } from "path";
+import { resolve } from "path";
+
 function GetRealPath(filepath: string) {
     //this function will return the real extended path
+    const OsHOME = require("os").homedir();
     if (filepath[0] === "~") {
-        return join(process.env.HOME, filepath.slice(1));
+        return OsHOME + filepath.slice(1);
     }
     return filepath;
 }
+
 (async () => {
     if (!existsSync(".//.env")) {
         const { db_path, db_port, db_pass, db_user, db_host } =
@@ -38,6 +42,7 @@ function GetRealPath(filepath: string) {
                     default: "localhost",
                 },
             ]);
+
         //create a .env based on the responses
         const wstream = createWriteStream(resolve(".env"));
         wstream.write(
@@ -54,13 +59,15 @@ function GetRealPath(filepath: string) {
                 .replace("\t", "")
         );
         wstream.end();
+
+        //create database
         const connection = mysql.createConnection({
             host: db_host,
-            password: db_pass,
             user: db_user,
+            password: db_pass,
         });
         //create the database
-        connection.query("CREATE DATABASE IF NOT EXISTS Anvw", (err, result) => { });
-        connection.destroy();
+        connection.execute("CREATE DATABASE IF NOT EXISTS Anvw");
+        connection.end();
     }
 })();
